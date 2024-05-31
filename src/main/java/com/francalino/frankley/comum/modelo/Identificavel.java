@@ -12,10 +12,11 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-@MappedSuperclass
+
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @NoArgsConstructor
+@MappedSuperclass
 public abstract class Identificavel implements Serializable{
 		
 	private static final long serialVersionUID = 1L;

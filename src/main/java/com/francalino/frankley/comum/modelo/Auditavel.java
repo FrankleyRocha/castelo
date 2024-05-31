@@ -19,10 +19,10 @@ public abstract class Auditavel extends Identificavel{
 	private Date criacao;
 	private Date modificacao;
 	
-	@ManyToOne
+	@ManyToOne(optional = true)
 	private Usuario criadoPor;
 	
-	@ManyToOne
+	@ManyToOne(optional = true)
 	private Usuario modificadoPor;
 				
 }

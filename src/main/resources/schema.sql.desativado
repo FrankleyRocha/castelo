@@ -1,0 +1,179 @@
+Hibernate: 
+    create table execucao (
+        criacao timestamp(6),
+        modificacao timestamp(6),
+        fim timestamp(6),
+        inicio timestamp(6),
+        observacao varchar(255),
+        id uuid not null,
+        criado_por_id uuid,
+        modificado_por_id uuid,
+        tarefa_id uuid,
+        primary key (id)
+    )
+Hibernate: 
+    create table movimentacao (
+        criacao timestamp(6),
+        modificacao timestamp(6),
+        id uuid not null,
+        criado_por_id uuid,
+        modificado_por_id uuid,
+        status_id uuid,
+        status_anterior_id uuid,
+        tarefa_id uuid,
+        primary key (id)
+    )
+Hibernate: 
+    create table status (
+        criacao timestamp(6),
+        modificacao timestamp(6),
+        descricao varchar(255),
+        nome varchar(255),
+        titulo varchar(255),
+        id uuid not null,
+        criado_por_id uuid,
+        modificado_por_id uuid,
+        primary key (id)
+    )
+Hibernate: 
+    create table tarefa (
+        criacao timestamp(6),
+        modificacao timestamp(6),
+        descricao varchar(255),
+        nome varchar(255),
+        titulo varchar(255),
+        indice bigint,
+        id uuid not null,
+        criado_por_id uuid,
+        modificado_por_id uuid,
+        status_id uuid,
+        primary key (id)
+    )
+Hibernate: 
+    create table usuario (
+        criacao timestamp(6),
+        modificacao timestamp(6),
+        email varchar(255),
+        senha varchar(255),
+        id uuid not null,
+        criado_por_id uuid,
+        modificado_por_id uuid,
+        primary key (id)
+    )
+Hibernate: 
+    create table versionavel (
+        id uuid not null,
+        versao_anterior_id uuid,
+        primary key (id)
+    )
+Hibernate: 
+    alter table if exists versionavel 
+       drop constraint if exists UKgkq4j79grey0yd3tknhbd8mx
+Hibernate: 
+    alter table if exists versionavel 
+       add constraint UKgkq4j79grey0yd3tknhbd8mx unique (versao_anterior_id)
+Hibernate: 
+    alter table if exists execucao 
+       add constraint FKo450i8sapi5qsnbmp20k8vn6b 
+       foreign key (criado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists execucao 
+       add constraint FKqegd7fhu0rntpkav7bm6i0710 
+       foreign key (modificado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists execucao 
+       add constraint FK1dkuu6hqjtq0oh3kwt3ft7wmh 
+       foreign key (tarefa_id) 
+       references tarefa
+Hibernate: 
+    alter table if exists execucao 
+       add constraint FKjxvgvvn4hnjv3utccik77w2qf 
+       foreign key (id) 
+       references versionavel
+Hibernate: 
+    alter table if exists movimentacao 
+       add constraint FKf5405w4d7eq54sjben3mkxblr 
+       foreign key (criado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists movimentacao 
+       add constraint FK5j5ykj226ptuny9sngyrr9ls4 
+       foreign key (modificado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists movimentacao 
+       add constraint FK9hcsvw6kvcsg2hgij40q0wbqv 
+       foreign key (status_id) 
+       references status
+Hibernate: 
+    alter table if exists movimentacao 
+       add constraint FKvad816fx4r390kiismb6to06 
+       foreign key (status_anterior_id) 
+       references status
+Hibernate: 
+    alter table if exists movimentacao 
+       add constraint FKf2j9ox8yubi09s62fwq79xogv 
+       foreign key (tarefa_id) 
+       references tarefa
+Hibernate: 
+    alter table if exists movimentacao 
+       add constraint FKk0dec9kwrw5hpshnqbp7adfmo 
+       foreign key (id) 
+       references versionavel
+Hibernate: 
+    alter table if exists status 
+       add constraint FKe5u59267ai9il7mgw4xpjulk5 
+       foreign key (criado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists status 
+       add constraint FK8koy8qf88uo0m9ibldybna1m9 
+       foreign key (modificado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists status 
+       add constraint FKaiga95mcv8br2764pr462jyc6 
+       foreign key (id) 
+       references versionavel
+Hibernate: 
+    alter table if exists tarefa 
+       add constraint FKhq9g416f0ow35m950iuutvdds 
+       foreign key (criado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists tarefa 
+       add constraint FKgvojapb8g15j5tl0nap6sr0gr 
+       foreign key (modificado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists tarefa 
+       add constraint FK6tsc6ls2trghg3pqmt99rh7b 
+       foreign key (status_id) 
+       references status
+Hibernate: 
+    alter table if exists tarefa 
+       add constraint FK7s55autiyk7vgw3xnruomhe7c 
+       foreign key (id) 
+       references versionavel
+Hibernate: 
+    alter table if exists usuario 
+       add constraint FK8jeurcbmkac6win71pqnktwd5 
+       foreign key (criado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists usuario 
+       add constraint FKqh8808115du07cq66n3ew8bg9 
+       foreign key (modificado_por_id) 
+       references usuario
+Hibernate: 
+    alter table if exists usuario 
+       add constraint FKh4byvfeu85libs3gwotkjj7sm 
+       foreign key (id) 
+       references versionavel
+Hibernate: 
+    alter table if exists versionavel 
+       add constraint FKskrwsrs5s3gaw91fvuh9kifl1 
+       foreign key (versao_anterior_id) 
+       references versionavel
