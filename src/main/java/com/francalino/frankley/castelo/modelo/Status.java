@@ -12,5 +12,5 @@ import lombok.EqualsAndHashCode;
 public class Status extends Descritivel{
 	
 	private static final long serialVersionUID = 1L;
-	
+			
 }

@@ -9,15 +9,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @MappedSuperclass
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@NoArgsConstructor
 public abstract class Identificavel implements Serializable{
 		
 	private static final long serialVersionUID = 1L;
 	
-	@Id @GeneratedValue(strategy = GenerationType.UUID) @EqualsAndHashCode.Include
+	@NonNull @Id @GeneratedValue(strategy = GenerationType.UUID) @EqualsAndHashCode.Include
 	protected UUID id;
 		
 }

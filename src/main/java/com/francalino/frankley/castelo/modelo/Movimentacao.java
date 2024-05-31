@@ -19,7 +19,7 @@ public class Movimentacao extends Identificavel {
 		
 	private Date momento;
 	
-	@ManyToOne @JsonIgnore
+	@ManyToOne
 	private Tarefa tarefa;
 	
 	@ManyToOne
