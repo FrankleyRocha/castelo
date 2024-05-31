@@ -20,6 +20,8 @@ public class Tarefa extends Descritivel{
 	private static final long serialVersionUID = 1L;
 	
 	public static final String STATUS_PADRAO = "A_FAZER";
+	
+	private Long indice;
 			
 	@ManyToOne
 	private Status status;

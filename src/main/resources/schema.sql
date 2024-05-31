@@ -26,6 +26,7 @@ create table status (
 
 create table tarefa (
     id uuid not null,
+    indice number,
     descricao varchar(255),
     nome varchar(255),
     titulo varchar(255),

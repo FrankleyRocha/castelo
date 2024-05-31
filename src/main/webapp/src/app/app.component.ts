@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { TaskService } from './task.service';
-import { Task } from './task';
+import { Tarefa } from './tarefa';
+import { Status } from './status';
 
 @Component({
   selector: 'app-root',
@@ -22,33 +23,37 @@ export class AppComponent {
 
       console.log(tasks);
 
-      this.todo = tasks.filter( task => task.status === 'todo').sort( (a,b) => a.index - b.index);
-      this.doing = tasks.filter( task => task.status === 'doing').sort( (a,b) => a.index - b.index);
-      this.done = tasks.filter( task => task.status === 'done').sort( (a,b) => a.index - b.index);
+      this.todo = tasks.filter( task => task.status.nome === 'A_FAZER').sort( (a,b) => a.indice - b.indice);
+      this.doing = tasks.filter( task => task.status.nome === 'FAZENDO').sort( (a,b) => a.indice - b.indice);
+      this.done = tasks.filter( task => task.status.nome === 'FEITO').sort( (a,b) => a.indice - b.indice);
       
     });
   }
 
-  task!:Task;
+  task!:Tarefa;
   
-  todo:Task[] = [];
+  todo:Tarefa[] = [];
 
-  doing:Task[] = [];
+  doing:Tarefa[] = [];
 
-  done:Task[] = [];
+  done:Tarefa[] = [];
 
   newTask(){
     this.task = {
-      id : null,
-      index : this.todo.length,
-      title : '',
-      status : 'todo'
+
+      indice : this.todo.length,
+      nome : '',
+      titulo : '',
+      
+      status : new Status()      
     };
   }
 
   addTask(){
-    if(this.task.title.length===0)
+    if(this.task.titulo.length===0)
       return;
+
+    console.log(this.task);
 
     this.taskService.save(this.task).subscribe( task => {
       this.todo.push(task);
@@ -57,14 +62,14 @@ export class AppComponent {
     
   }
 
-  updateIndex(tasks:Task[]){
+  updateIndex(tasks:Tarefa[]){
 
-    let tasksToUpdate:Task[] = [];
+    let tasksToUpdate:Tarefa[] = [];
 
     for(let task of tasks){
       let index = tasks.indexOf(task);
-      if(task.index !== tasks.indexOf(task)){
-        task.index = index;
+      if(task.indice !== tasks.indexOf(task)){
+        task.indice = index;
         tasksToUpdate.push(task);
       }
     }
@@ -76,7 +81,7 @@ export class AppComponent {
 
   }
 
-  drop(event: CdkDragDrop<Task[]>) {
+  drop(event: CdkDragDrop<Tarefa[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -89,8 +94,8 @@ export class AppComponent {
     }
 
     let task = event.container.data[event.currentIndex];
-    task.index = event.currentIndex;
-    task.status = event.container.id;
+    task.indice = event.currentIndex;
+    task.status.nome = event.container.id;
         
     this.taskService.save(task).subscribe( t => {
       console.log(t);

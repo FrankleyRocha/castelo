@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Task } from './task';
+import { Tarefa } from './tarefa';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,17 +12,24 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
-  all():Observable<Task[]>{
-    return this.http.get<Task[]>(
-      `http://localhost:8080/api/tasks`
+  all():Observable<Tarefa[]>{
+    return this.http.get<Tarefa[]>(
+      `http://localhost:8081/api/tarefas`
     );
   }
 
-  save(task:Task):Observable<Task>{
-    return this.http.post<Task>(
-      `http://localhost:8080/api/tasks`,
-      task
-    );
+  save(task:Tarefa):Observable<Tarefa>{
+
+    if(task.id != undefined)
+      return this.http.patch<Tarefa>(
+        `http://localhost:8081/api/tarefas`,
+        task
+      );
+    else
+      return this.http.post<Tarefa>(
+        `http://localhost:8081/api/tarefas`,
+        task
+      );
   }
 
 }

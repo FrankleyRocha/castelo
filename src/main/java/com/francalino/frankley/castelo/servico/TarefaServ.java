@@ -30,8 +30,18 @@ public class TarefaServ extends IdentificavelCrudServ<Tarefa>{
 	public TarefaServ(TarefaRepo repo) {
 		super(repo);
 	}
-	
+					
+	@Override
+	public Tarefa atualizar(Tarefa o) {
+
+		Movimentacao movimentacao = movimentar(o);
 		
+		if(movimentacao!=null)
+			return(movimentacao.getTarefa());
+		else
+			return super.atualizar(o);
+	}
+
 	@Override
 	public Tarefa criar(Tarefa t) {
 				
@@ -90,7 +100,7 @@ public class TarefaServ extends IdentificavelCrudServ<Tarefa>{
 		
 		if(
 			t.getStatus() != null &&
-			t.getStatus().getId() == null &&
+			//t.getStatus().getId() == null &&
 			t.getStatus().getNome() != null &&
 			!t.getStatus().getNome().isBlank()
 		)
@@ -98,13 +108,21 @@ public class TarefaServ extends IdentificavelCrudServ<Tarefa>{
 		else
 			status = statusServ.recuperar(t.getStatus().getId());
 		
-		Movimentacao movimentacao = new Movimentacao();
-		movimentacao.setTarefa(tarefa);
-		movimentacao.setStatusAnterior(tarefa.getStatus());
-		movimentacao.setStatus(status);
-		movimentacao.setMomento(new Date());
+		if(status != null && !status.equals(tarefa.getStatus())){
 		
-		return movimentacaoRepo.save(movimentacao);
+			Movimentacao movimentacao = new Movimentacao();
+			movimentacao.setTarefa(tarefa);
+			movimentacao.setStatusAnterior(tarefa.getStatus());
+			movimentacao.setStatus(status);
+			movimentacao.setMomento(new Date());
+			
+			tarefa.setStatus(status);
+			atualizar(tarefa);
+			
+			return movimentacaoRepo.save(movimentacao);			
+		}
+		
+		return null;
 	}
 	
 }
