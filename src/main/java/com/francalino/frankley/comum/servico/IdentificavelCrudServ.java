@@ -1,4 +1,4 @@
-package com.francalino.frankley.castelo.api.servico;
+package com.francalino.frankley.comum.servico;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -7,9 +7,9 @@ import java.util.UUID;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.francalino.frankley.castelo.api.modelo.Identificavel;
+import com.francalino.frankley.comum.modelo.Identificavel;
 
-abstract class IdentificavelCrudServ<T extends Identificavel> {
+public abstract class IdentificavelCrudServ<T extends Identificavel> {
 	
 	protected JpaRepository<T, UUID> repo;
 	

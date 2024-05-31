@@ -1,4 +1,4 @@
-package com.francalino.frankley.castelo.api.modelo;
+package com.francalino.frankley.comum.modelo;
 
 import java.io.Serializable;
 import java.util.UUID;

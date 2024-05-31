@@ -1,9 +1,8 @@
-package com.francalino.frankley.castelo.api.modelo;
+package com.francalino.frankley.castelo.modelo;
+
+import com.francalino.frankley.comum.modelo.Descritivel;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
