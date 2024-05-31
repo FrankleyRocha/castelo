@@ -23,11 +23,9 @@ public class Tarefa extends Descritivel{
 	@ManyToOne
 	private Status status;
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL)
 	private List<Movimentacao> movimentacoes = new ArrayList<>();
 	
-	@JsonIgnore
 	@OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL)
 	private List<Execucao> execucoes = new ArrayList<>();
 	

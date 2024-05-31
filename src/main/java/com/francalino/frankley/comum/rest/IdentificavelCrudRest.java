@@ -23,8 +23,7 @@ public class IdentificavelCrudRest<T extends Identificavel> {
 	protected IdentificavelCrudServ<T> serv;
 	
 	@GetMapping
-	public ResponseEntity<List<T>> listar() {
-		
+	public ResponseEntity<List<T>> listar() {		
 		return ResponseEntity.ok(
 			serv.listar()
 		);
@@ -46,12 +45,9 @@ public class IdentificavelCrudRest<T extends Identificavel> {
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<T> recupear(@PathVariable UUID id) {
-		
-		T o = serv.recuperar(id);
-		
+	public ResponseEntity<T> recupear(@PathVariable UUID id) {				
 		return ResponseEntity.ok(
-			o
+			serv.recuperar(id)
 		);
 	} 
 
