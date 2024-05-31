@@ -14,7 +14,7 @@
 
 <form class="example-form" (ngSubmit)="addTask()">
     <mat-form-field class="example-full-width" appearance="fill">
-        <mat-label>Task title</mat-label>
+        <mat-label>Digite o título da tarefa aqui</mat-label>
         <input required name="task" matInput placeholder="Ex. Create a task app" [(ngModel)]="task.titulo">
     </mat-form-field>
 
@@ -23,7 +23,7 @@
         <textarea matInput placeholder="Ex. Create an app that control my tasks and ..."></textarea>
     </mat-form-field> -->
 
-    <button type="submit" mat-raised-button color="primary">Add Task</button>
+    <button type="submit" mat-raised-button color="primary">Adicionar Tarefa</button>
 </form>
 
 <div cdkDropListGroup>
