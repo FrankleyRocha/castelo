@@ -27,8 +27,8 @@ public class TarefaRest {
 	}
 	
 	@PostMapping
-	public Tarefa novo(@RequestBody Tarefa o) {
-		return serv.novo(o);
+	public Tarefa salvar(@RequestBody Tarefa o) {
+		return serv.salvar(o);
 	}
 
 }

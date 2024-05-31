@@ -18,7 +18,7 @@ public class TarefaServ {
 		return repo.findAll();
 	}
 	
-	public Tarefa novo(Tarefa o) {
+	public Tarefa salvar(Tarefa o) {
 		return repo.save(o);
 	}
 
