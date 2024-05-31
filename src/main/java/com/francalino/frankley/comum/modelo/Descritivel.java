@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 @MappedSuperclass
 @Data
 @EqualsAndHashCode(callSuper = true)
-public abstract class Descritivel extends Identificavel{
+public abstract class Descritivel extends Auditavel{
 		
 	private static final long serialVersionUID = 1L;
 		

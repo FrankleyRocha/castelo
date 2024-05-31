@@ -11,18 +11,17 @@ import com.francalino.frankley.castelo.modelo.Execucao;
 import com.francalino.frankley.castelo.modelo.Movimentacao;
 import com.francalino.frankley.castelo.modelo.Status;
 import com.francalino.frankley.castelo.modelo.Tarefa;
-import com.francalino.frankley.castelo.repo.MovimentacaoRepo;
 import com.francalino.frankley.castelo.repo.TarefaRepo;
-import com.francalino.frankley.comum.servico.IdentificavelCrudServ;
+import com.francalino.frankley.comum.servico.AuditavelCrudServ;
 
 @Service
-public class TarefaServ extends IdentificavelCrudServ<Tarefa>{
+public class TarefaServ extends AuditavelCrudServ<Tarefa>{
 	
 	@Autowired
 	private ExecucaoServ execucaoServ;
 	
 	@Autowired
-	private MovimentacaoRepo movimentacaoRepo;
+	private MovimentacaoServ movimentacaoServ;
 	
 	@Autowired
 	private StatusServ statusServ;
@@ -114,12 +113,11 @@ public class TarefaServ extends IdentificavelCrudServ<Tarefa>{
 			movimentacao.setTarefa(tarefa);
 			movimentacao.setStatusAnterior(tarefa.getStatus());
 			movimentacao.setStatus(status);
-			movimentacao.setMomento(new Date());
 			
 			tarefa.setStatus(status);
 			atualizar(tarefa);
 			
-			return movimentacaoRepo.save(movimentacao);			
+			return movimentacaoServ.criar(movimentacao);			
 		}
 		
 		return null;

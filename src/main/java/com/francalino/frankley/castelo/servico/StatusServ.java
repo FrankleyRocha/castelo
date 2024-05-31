@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 
 import com.francalino.frankley.castelo.modelo.Status;
 import com.francalino.frankley.castelo.repo.StatusRepo;
-import com.francalino.frankley.comum.servico.IdentificavelCrudServ;
+import com.francalino.frankley.comum.servico.AuditavelCrudServ;
 
 @Service
-public class StatusServ extends IdentificavelCrudServ<Status>{
+public class StatusServ extends AuditavelCrudServ<Status>{
 	
 	public StatusServ(StatusRepo repo) {
 		super(repo);
