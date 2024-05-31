@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 @MappedSuperclass
 @Data
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-abstract class Identificavel implements Serializable{
+public abstract class Identificavel implements Serializable{
 		
 	private static final long serialVersionUID = 1L;
 	
