@@ -70,6 +70,9 @@ public class TarefaServ extends IdentificavelCrudServ<Tarefa>{
 		Execucao execucao = execucaoServ.recuperar(
 			e.getId()
 		);
+		
+		if(execucao.getFim() != null)
+			throw new IllegalArgumentException("Execução já finalizada!");
 				
 		execucao.setFim(new Date());		
 		execucao.setObservacao(
