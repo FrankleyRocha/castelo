@@ -1,21 +1,26 @@
 package com.francalino.frankley.castelo.api.modelo;
 
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Entity
 @Data
-public class Tarefa {
+@EqualsAndHashCode(callSuper = true)
+public class Tarefa extends Descritivel{
 	
-	@Id @GeneratedValue(strategy = GenerationType.UUID)
-	private UUID id;
-	private String nome;
-	private String titulo;
-	private String descricao;
-
+	@ManyToOne
+	private Status status;
+	
+	@OneToMany(mappedBy = "tarefa")
+	private List<Movimentacao> movimentacoes = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "tarefa")
+	private List<Execucao> execucoes = new ArrayList<>();
+	
 }
