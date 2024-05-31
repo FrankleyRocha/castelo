@@ -21,7 +21,7 @@ public class Execucao extends Identificavel {
 	private Date fim;
 	private String observacao;
 	
-	@ManyToOne
+	@JsonIgnore @ManyToOne
 	private Tarefa tarefa;
 	
 }
