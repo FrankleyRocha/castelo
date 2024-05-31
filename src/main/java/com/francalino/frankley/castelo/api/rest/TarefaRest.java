@@ -1,9 +1,13 @@
 package com.francalino.frankley.castelo.api.rest;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +24,36 @@ public class TarefaRest {
 	private TarefaServ serv;
 	
 	@GetMapping
-	public List<Tarefa> listar() {
+	public ResponseEntity<List<Tarefa>> listar() {
 		
-		return serv.listar();
+		return ResponseEntity.ok(
+			serv.listar()
+		);
 		
 	}
 	
 	@PostMapping
-	public Tarefa salvar(@RequestBody Tarefa o) {
-		return serv.salvar(o);
+	public ResponseEntity<Tarefa> novo(@RequestBody Tarefa o) {
+		return ResponseEntity.ok(
+			serv.criar(o)
+		);
 	}
+	
+	@PatchMapping
+	public ResponseEntity<Tarefa> editar(@RequestBody Tarefa o) {
+		return ResponseEntity.ok(
+			serv.atualizar(o)
+		);
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Tarefa> recupear(@PathVariable UUID id) {
+		
+		Tarefa o = serv.recuperar(id);
+		
+		return ResponseEntity.ok(
+			o
+		);
+	} 
 
 }
