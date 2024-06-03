@@ -1,0 +1,54 @@
+<form class="example-form" (ngSubmit)="addTask()">
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Digite o título da tarefa aqui</mat-label>
+        <input required name="task" matInput placeholder="Ex. Create a task app" [(ngModel)]="task.titulo">
+    </mat-form-field>
+
+    <!-- <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Task description</mat-label>
+        <textarea matInput placeholder="Ex. Create an app that control my tasks and ..."></textarea>
+    </mat-form-field> -->
+
+    <button type="submit" mat-raised-button color="primary">Adicionar Tarefa</button>
+</form>
+
+<div cdkDropListGroup>
+  <div class="example-container">
+    <h2>A Fazer</h2>
+
+    <div
+      id="A_FAZER"
+      cdkDropList
+      [cdkDropListData]="todo"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of todo" cdkDrag>{{item.titulo}}</div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Fazendo</h2>
+
+    <div
+      id="FAZENDO"
+      cdkDropList
+      [cdkDropListData]="doing"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of doing" cdkDrag>{{item.titulo}}</div>
+    </div>
+  </div>
+
+  <div class="example-container">
+    <h2>Feito</h2>
+
+    <div
+      id="FEITO"
+      cdkDropList
+      [cdkDropListData]="done"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of done" cdkDrag>{{item.titulo}}</div>
+    </div>
+  </div>
+</div>

@@ -12,12 +12,18 @@ import {MatListModule} from '@angular/material/list';
 import {MatInputModule} from '@angular/material/input';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { LoginComponent } from './paginas/login/login.component';
+import { TaskComponent } from './paginas/task/task.component';
+import { HttpInterceptorService } from './auth/http-interceptor.service';
+import { HomeComponent } from './paginas/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent,
+    TaskComponent,
+    HomeComponent
   ],
   imports: [
     HttpClientModule,
@@ -32,7 +38,9 @@ import { HttpClientModule } from '@angular/common/http';
     DragDropModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
