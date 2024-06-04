@@ -16,9 +16,14 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
+import org.springframework.security.core.session.SessionRegistry;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2UserAuthority;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.session.RegisterSessionAuthenticationStrategy;
+import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 
 @Configuration
 @EnableWebSecurity
@@ -27,15 +32,31 @@ class SecurityConfig {
 	private static final String GROUPS = "groups";
 	private static final String REALM_ACCESS_CLAIM = "realm_access";
 	private static final String ROLES_CLAIM = "roles";
+	
+    @Bean
+    public SessionRegistry sessionRegistry() {
+        return new SessionRegistryImpl();
+    }
+
+    @Bean
+    protected SessionAuthenticationStrategy sessionAuthenticationStrategy() {
+        return new RegisterSessionAuthenticationStrategy(sessionRegistry());
+    }
+
+    @Bean
+    public HttpSessionEventPublisher httpSessionEventPublisher() {
+        return new HttpSessionEventPublisher();
+    }
 
 	@Bean
 	@Order(1)
 	public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
 
 		http.authorizeHttpRequests(a -> a.requestMatchers("/api/**").authenticated().anyRequest().permitAll());
-
-		http.oauth2ResourceServer((oauth2) -> oauth2.jwt(Customizer.withDefaults()));
-
+		
+		http.oauth2ResourceServer((oauth2) -> oauth2
+	        .jwt(Customizer.withDefaults()));
+	    	    	
 		// http.oauth2Login(Customizer.withDefaults());
 
 		/*
